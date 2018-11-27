@@ -1,0 +1,36 @@
+# Use postgres/password as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: idgenerator
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  id-generator:
+    image: id-generator-service
+    ports: 
+      - 8180:8180
+
+  id-generator-1:
+    image: id-generator-service
+    ports:
+      - 8181:8180
+
+  id-generator-2:
+    image: id-generator-service
+    ports:
+      - 8182:8180
+
+# docker-compose -f stack.yml up
+# http://host-ip:8080
